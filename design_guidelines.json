@@ -1,0 +1,104 @@
+{
+  "project_name": "WhatsApp Style Food Catalogue",
+  "identity": {
+    "persona": "E1 - The Anti-AI Designer",
+    "tone": "Appetizing, Direct, Trusted, Night-mode comfort",
+    "theme": "dark"
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Outfit, sans-serif",
+      "body": "Inter, sans-serif"
+    },
+    "scale": {
+      "h1": "text-4xl md:text-5xl font-bold tracking-tight",
+      "h2": "text-3xl md:text-4xl font-semibold tracking-tight",
+      "h3": "text-2xl md:text-3xl font-medium",
+      "body_lg": "text-lg leading-relaxed",
+      "body_base": "text-base leading-relaxed",
+      "caption": "text-sm text-muted-foreground"
+    }
+  },
+  "colors": {
+    "palette": {
+      "background": "#0B141A",
+      "surface": "#202C33",
+      "surface_hover": "#2A3942",
+      "primary": "#25D366",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#00A884",
+      "accent": "#EF4444",
+      "text_primary": "#E9EDEF",
+      "text_secondary": "#8696A0",
+      "border": "#2A3942"
+    },
+    "semantic": {
+      "success": "#22C55E",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "info": "#3B82F6"
+    }
+  },
+  "layout": {
+    "spacing": {
+      "container_padding": "p-4 md:p-8",
+      "section_gap": "gap-8 md:gap-12",
+      "item_gap": "gap-4"
+    },
+    "grid": {
+      "desktop": "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+      "mobile": "flex flex-col gap-4"
+    },
+    "container": "max-w-7xl mx-auto"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#25D366] hover:bg-[#1DA851] text-white font-medium rounded-full px-6 py-2 transition-all shadow-lg active:scale-95",
+      "secondary": "bg-[#202C33] hover:bg-[#2A3942] text-[#E9EDEF] border border-[#2A3942] rounded-full px-6 py-2 transition-all active:scale-95",
+      "icon": "p-2 rounded-full hover:bg-[#2A3942] transition-colors"
+    },
+    "cards": {
+      "product": "bg-[#202C33] rounded-xl overflow-hidden border border-[#2A3942] hover:border-[#25D366]/50 transition-colors group flex flex-row md:flex-col",
+      "cart_item": "flex items-center justify-between p-4 bg-[#111B21] rounded-lg border border-[#2A3942]"
+    },
+    "inputs": {
+      "base": "bg-[#2A3942] border-none text-[#E9EDEF] placeholder:text-[#8696A0] focus:ring-1 focus:ring-[#25D366] rounded-lg px-4 py-3 w-full"
+    },
+    "navigation": {
+      "bottom_bar": "fixed bottom-0 left-0 right-0 bg-[#202C33] border-t border-[#2A3942] p-4 flex justify-between items-center z-50 md:hidden",
+      "header": "sticky top-0 z-40 w-full backdrop-blur-lg bg-[#0B141A]/80 border-b border-[#2A3942]"
+    }
+  },
+  "assets": {
+    "images": {
+      "mutton_handi": "https://images.unsplash.com/photo-1727403851978-46fd1fd82d9d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBoYW5kaSUyMGRhcmslMjBiYWNrZ3JvdW5kJTIwZm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc3Mjk2NDk0N3ww&ixlib=rb-4.1.0&q=85",
+      "chicken_handi": "https://images.pexels.com/photos/34159112/pexels-photo-34159112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "chicken_biryani": "https://images.unsplash.com/photo-1752673508949-f4aeeaef75f0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwxfHxiaXJ5YW5pJTIwcmljZSUyMGJvd2wlMjBmb29kfGVufDB8fHx8MTc3Mjk2NDk2Nnww&ixlib=rb-4.1.0&q=85",
+      "butter_naan": "https://images.pexels.com/photos/12737800/pexels-photo-12737800.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "hero_bg": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+    },
+    "icons": "lucide-react"
+  },
+  "motion": {
+    "hover": "transition-all duration-300 ease-out hover:-translate-y-1",
+    "tap": "active:scale-95 transition-transform duration-100",
+    "enter": "animate-in fade-in zoom-in-95 duration-300",
+    "list_stagger": "stagger-100"
+  },
+  "accessibility": {
+    "contrast": "Ensure text contrast ratio of 4.5:1 against #0B141A background",
+    "focus": "focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B141A]",
+    "reduced_motion": "motion-reduce:transition-none motion-reduce:animate-none"
+  },
+  "universal_guidelines": [
+    "Do NOT use gradients for backgrounds, use solid deep colors #0B141A or #202C33",
+    "Use 'Outfit' font for all headings to give a modern friendly vibe",
+    "Ensure 'Add to Cart' buttons are prominent and thumb-accessible on mobile",
+    "Use pill-shaped quantity controls (- 1 +) for ease of use",
+    "Images should have a subtle border radius (rounded-xl) and no harsh shadows, use 'ring-1 ring-white/10' instead",
+    "Toast notifications (Sonner) must be used for all 'Added to Cart' actions",
+    "Mobile View Cart button must float at the bottom with a glassmorphism effect",
+    "Do NOT use standard HTML select/input, use Shadcn Select/Input components"
+  ],
+  "instructions_to_main_agent": "Implement the catalogue as a single-page app experience. Use 'react-router-dom' for navigation between Catalogue, Cart, and Checkout, but keep transitions smooth. The 'View Cart' button on mobile should be a sticky footer. Use Context API or Zustand for Cart state management. Ensure the dark theme is hardcoded as default (class='dark')."
+}

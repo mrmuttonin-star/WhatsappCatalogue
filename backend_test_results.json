@@ -1,0 +1,235 @@
+{
+  "timestamp": "2026-03-08T10:22:59.364128",
+  "summary": {
+    "tests_run": 7,
+    "tests_passed": 6,
+    "success_rate": 85.71428571428571
+  },
+  "detailed_results": [
+    {
+      "test": "API Root",
+      "endpoint": "",
+      "method": "GET",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "message": "WhatsApp Catalogue API"
+      }
+    },
+    {
+      "test": "Get All Products",
+      "endpoint": "products",
+      "method": "GET",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": [
+        {
+          "id": "mutton-250",
+          "name": "Ahuna Mutton (250g)",
+          "description": "Mutton 3 Pieces",
+          "price": 499.0,
+          "original_price": 599.0,
+          "image": "https://images.unsplash.com/photo-1727403851978-46fd1fd82d9d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBoYW5kaSUyMGRhcmslMjBiYWNrZ3JvdW5kJTIwZm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc3Mjk2NDk0N3ww&ixlib=rb-4.1.0&q=85",
+          "category": "Mutton Handi"
+        },
+        {
+          "id": "mutton-1000",
+          "name": "Ahuna Mutton (1000g)",
+          "description": "Mutton 12 Pieces",
+          "price": 1499.0,
+          "original_price": 1599.0,
+          "image": "https://images.unsplash.com/photo-1727403851978-46fd1fd82d9d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBoYW5kaSUyMGRhcmslMjBiYWNrZ3JvdW5kJTIwZm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc3Mjk2NDk0N3ww&ixlib=rb-4.1.0&q=85",
+          "category": "Mutton Handi"
+        },
+        {
+          "id": "mutton-500",
+          "name": "Ahuna Mutton (500g)",
+          "description": "Mutton 6 Pieces",
+          "price": 799.0,
+          "original_price": 899.0,
+          "image": "https://images.unsplash.com/photo-1727403851978-46fd1fd82d9d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBoYW5kaSUyMGRhcmslMjBiYWNrZ3JvdW5kJTIwZm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc3Mjk2NDk0N3ww&ixlib=rb-4.1.0&q=85",
+          "category": "Mutton Handi"
+        },
+        {
+          "id": "chicken-1000",
+          "name": "Ahuna Chicken (1000g)",
+          "description": "12 Piece - Large cum Medium",
+          "price": 799.0,
+          "original_price": 899.0,
+          "image": "https://images.pexels.com/photos/34159112/pexels-photo-34159112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Chicken Handi"
+        },
+        {
+          "id": "chicken-500",
+          "name": "Ahuna Chicken (500g)",
+          "description": "6 Piece Chicken - Large cum Medium",
+          "price": 499.0,
+          "original_price": 599.0,
+          "image": "https://images.pexels.com/photos/34159112/pexels-photo-34159112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Chicken Handi"
+        },
+        {
+          "id": "chicken-thali",
+          "name": "Chicken Thali",
+          "description": "4 Piece Chicken and Rice",
+          "price": 499.0,
+          "original_price": 599.0,
+          "image": "https://images.unsplash.com/photo-1752673508949-f4aeeaef75f0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwxfHxiaXJ5YW5pJTIwcmljZSUyMGJvd2wlMjBmb29kfGVufDB8fHx8MTc3Mjk2NDk2Nnww&ixlib=rb-4.1.0&q=85",
+          "category": "Chicken Handi"
+        },
+        {
+          "id": "rice-plate",
+          "name": "Rice - Full Plate",
+          "description": "Basmati Steam Rice",
+          "price": 150.0,
+          "original_price": 200.0,
+          "image": "https://images.unsplash.com/photo-1752673508949-f4aeeaef75f0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwxfHxiaXJ5YW5pJTIwcmljZSUyMGJvd2wlMjBmb29kfGVufDB8fHx8MTc3Mjk2NDk2Nnww&ixlib=rb-4.1.0&q=85",
+          "category": "Add-ons"
+        },
+        {
+          "id": "tawa-roti",
+          "name": "Tawa Roti (\u20b920 Per Piece)",
+          "description": "Fresh Tawa Roti",
+          "price": 20.0,
+          "original_price": 30.0,
+          "image": "https://images.pexels.com/photos/12737800/pexels-photo-12737800.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Add-ons"
+        },
+        {
+          "id": "combo-mutton-chicken",
+          "name": "Ahuna Mutton & Chicken Handi",
+          "description": "Mutton 4 Pieces + Chicken 4 Pieces",
+          "price": 1099.0,
+          "original_price": 1199.0,
+          "image": "https://images.unsplash.com/photo-1727403851978-46fd1fd82d9d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjh8MHwxfHNlYXJjaHwyfHxtdXR0b24lMjBoYW5kaSUyMGRhcmslMjBiYWNrZ3JvdW5kJTIwZm9vZCUyMHBob3RvZ3JhcGh5fGVufDB8fHx8MTc3Mjk2NDk0N3ww&ixlib=rb-4.1.0&q=85",
+          "category": "Combo"
+        },
+        {
+          "id": "combo-chicken-mutton-2",
+          "name": "Ahuna Chicken & Mutton Handi",
+          "description": "Chicken 6 Pieces + Mutton 6 Pieces",
+          "price": 1599.0,
+          "original_price": 1799.0,
+          "image": "https://images.pexels.com/photos/34159112/pexels-photo-34159112.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "category": "Combo"
+        }
+      ]
+    },
+    {
+      "test": "Create Razorpay Order",
+      "endpoint": "razorpay/create-order",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 500,
+      "success": false,
+      "error_data": {
+        "detail": "Failed to create payment order: Authentication failed"
+      }
+    },
+    {
+      "test": "Create COD Order",
+      "endpoint": "orders",
+      "method": "POST",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "2d9997c7-5f9d-4089-8b3c-9098d4b08caa",
+        "customer_name": "Test Customer",
+        "customer_phone": "9999999999",
+        "customer_address": "123 Test Street, Test City",
+        "items": [
+          {
+            "product_id": "mutton-250",
+            "name": "Ahuna Mutton (250g)",
+            "price": 499.0,
+            "quantity": 1,
+            "image": "https://example.com/image.jpg"
+          }
+        ],
+        "total_amount": 499.0,
+        "payment_method": "COD",
+        "payment_status": "COD",
+        "order_status": "CONFIRMED",
+        "razorpay_order_id": null,
+        "razorpay_payment_id": null,
+        "created_at": "2026-03-08T10:22:58.981828Z"
+      }
+    },
+    {
+      "test": "Get All Orders",
+      "endpoint": "orders",
+      "method": "GET",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": [
+        {
+          "id": "2d9997c7-5f9d-4089-8b3c-9098d4b08caa",
+          "customer_name": "Test Customer",
+          "customer_phone": "9999999999",
+          "customer_address": "123 Test Street, Test City",
+          "items": [
+            {
+              "product_id": "mutton-250",
+              "name": "Ahuna Mutton (250g)",
+              "price": 499.0,
+              "quantity": 1,
+              "image": "https://example.com/image.jpg"
+            }
+          ],
+          "total_amount": 499.0,
+          "payment_method": "COD",
+          "payment_status": "COD",
+          "order_status": "CONFIRMED",
+          "razorpay_order_id": null,
+          "razorpay_payment_id": null,
+          "created_at": "2026-03-08T10:22:58.981828Z"
+        }
+      ]
+    },
+    {
+      "test": "Create Online Order Without Payment (Should Fail)",
+      "endpoint": "orders",
+      "method": "POST",
+      "expected_status": 400,
+      "actual_status": 400,
+      "success": true,
+      "response_data": {
+        "detail": "Payment verification data missing"
+      }
+    },
+    {
+      "test": "Get Order by ID (2d9997c7-5f9d-4089-8b3c-9098d4b08caa)",
+      "endpoint": "orders/2d9997c7-5f9d-4089-8b3c-9098d4b08caa",
+      "method": "GET",
+      "expected_status": 200,
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "2d9997c7-5f9d-4089-8b3c-9098d4b08caa",
+        "customer_name": "Test Customer",
+        "customer_phone": "9999999999",
+        "customer_address": "123 Test Street, Test City",
+        "items": [
+          {
+            "product_id": "mutton-250",
+            "name": "Ahuna Mutton (250g)",
+            "price": 499.0,
+            "quantity": 1,
+            "image": "https://example.com/image.jpg"
+          }
+        ],
+        "total_amount": 499.0,
+        "payment_method": "COD",
+        "payment_status": "COD",
+        "order_status": "CONFIRMED",
+        "razorpay_order_id": null,
+        "razorpay_payment_id": null,
+        "created_at": "2026-03-08T10:22:58.981828Z"
+      }
+    }
+  ]
+}
