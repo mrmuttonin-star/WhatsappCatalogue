@@ -28,7 +28,8 @@ const Catalogue = () => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(`${API}/api/products`);
-      setProducts(response.data);
+      setProducts(response.data.data);
+      console.log("API RESPONSE:", response.data);
     } catch (error) {
       console.error('Failed to fetch products:', error);
       toast.error('Failed to load products');
