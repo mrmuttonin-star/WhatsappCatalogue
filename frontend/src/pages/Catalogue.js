@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useCallback} from "react";
 import axios from "axios";
 import { ShoppingCart, Plus, Minus, ArrowLeft } from "lucide-react";
 import { useCart } from "../context/CartContext";
@@ -22,20 +22,34 @@ const Catalogue = () => {
     useCart();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  
+//   const fetchProducts = useCallback(async () => {
+//     try {
+//       const response = await axios.get(`${API}/api/products`);
+//       const data = response.data?.data || response.data?.products || [];
+//       setProducts(Array.isArray(data) ? data : []);
+//       console.log("API RESPONSE:", response.data);
+//       console.log("FULL RESPONSE:", response);
+//       console.log("DATA:", response.data);
+//       console.log("PRODUCTS:", products);
+// console.log("IS ARRAY:", Array.isArray(products));
+//     } catch (error) {
+//       console.error("Failed to fetch products:", error);
+//       toast.error("Failed to load products");
+//     } finally {
+//       setLoading(false);
+//     }
+//  }, [products]);
 
+  useEffect(() => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(`${API}/api/products`);
-      const data = response.data?.data || response.data?.products || [];
-      setProducts(Array.isArray(data) ? data : []);
+
+      // ✅ Direct data use karo
+      setProducts(Array.isArray(response.data) ? response.data : []);
+
       console.log("API RESPONSE:", response.data);
-      console.log("FULL RESPONSE:", response);
-      console.log("DATA:", response.data);
-      console.log("PRODUCTS:", products);
-console.log("IS ARRAY:", Array.isArray(products));
     } catch (error) {
       console.error("Failed to fetch products:", error);
       toast.error("Failed to load products");
@@ -43,6 +57,9 @@ console.log("IS ARRAY:", Array.isArray(products));
       setLoading(false);
     }
   };
+
+  fetchProducts();
+}, []);
 
   const groupedProducts = (Array.isArray(products) ? products : []).reduce(
     (acc, product) => {
