@@ -16,6 +16,19 @@ import requests
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 import urllib.parse
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "http://srv1554624.hstgr.cloud:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 BASE_DIR = Path(__file__).resolve().parent
