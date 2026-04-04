@@ -18,6 +18,8 @@ from pathlib import Path
 import urllib.parse
 from fastapi.middleware.cors import CORSMiddleware
 
+app = FastAPI()
+
 origins = [
     "http://srv1554624.hstgr.cloud:3000",
 ]
