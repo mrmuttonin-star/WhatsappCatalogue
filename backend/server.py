@@ -21,7 +21,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://srv1554624.hstgr.cloud:3000",
+    "https://whatsappcatalogue.mrmutton.com",
 ]
 
 app.add_middleware(
@@ -52,8 +52,6 @@ razorpay_key_secret = os.environ.get('RAZORPAY_KEY_SECRET', 'dummy_secret')
 razorpay_client = razorpay.Client(auth=(razorpay_key_id, razorpay_key_secret))
 print("RAZORPAY KEY:", razorpay_key_id)
 
-# Create the main app without a prefix
-# app = FastAPI()
 
 
 app.mount("/images", StaticFiles(directory=BASE_DIR / "images"), name="images")
@@ -579,14 +577,6 @@ async def get_order(order_id: str):
 
 # Include the router in the main app
 app.include_router(api_router)
-
-# app.add_middleware(
-#     # CORSMiddleware,
-#     allow_credentials=True,
-#     allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
 
 # Configure logging
 logging.basicConfig(
