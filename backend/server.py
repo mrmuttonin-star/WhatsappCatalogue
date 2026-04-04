@@ -21,7 +21,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "http://whatsappcatalogue.mrmutton.com",
+    "https://whatsappcatalogue.mrmutton.com",
 ]
 
 app.add_middleware(
