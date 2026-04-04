@@ -153,7 +153,7 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 3 Pieces",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/ahuna-mutton.png",
+        "image": "http://api.mrmutton.com/images/ahuna-mutton.png",
         "category": "Mutton Handi"
     },
     {
