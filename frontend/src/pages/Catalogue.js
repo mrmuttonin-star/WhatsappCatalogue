@@ -44,7 +44,7 @@ const Catalogue = () => {
   useEffect(() => {
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(`${API}/api/products`);
+      const response = await axios.get(`${API}/products`);
 
       // ✅ Direct data use karo
       setProducts(Array.isArray(response.data) ? response.data : []);

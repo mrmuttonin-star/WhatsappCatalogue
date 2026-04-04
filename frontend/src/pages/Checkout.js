@@ -501,7 +501,7 @@ GST: ₹${order.gst_amount.toFixed(2)}
       console.log("STEP 1");
 
       // Create Razorpay order for ₹100 token
-      const orderResponse = await axios.post(`${API}/api/razorpay/create-order`, {
+      const orderResponse = await axios.post(`${API}/razorpay/create-order`, {
         amount: CHARGES.COD_TOKEN * 100,
       });
 
@@ -600,7 +600,7 @@ GST: ₹${order.gst_amount.toFixed(2)}
         ...paymentDetails,
       };
 
-      const response = await axios.post(`${API}/api/orders`, orderData);
+      const response = await axios.post(`${API}/orders`, orderData);
 
       // // ✅ WhatsApp FIRST
       // if (openWhatsApp) {
@@ -640,7 +640,7 @@ GST: ₹${order.gst_amount.toFixed(2)}
       setLoading(true);
 
       // Create Razorpay order for full amount
-      const orderResponse = await axios.post(`${API}/api/razorpay/create-order`, {
+      const orderResponse = await axios.post(`${API}/razorpay/create-order`, {
         // amount: grandTotal,
         amount: Math.round(grandTotal * 100),
       });
