@@ -162,7 +162,7 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 12 Pieces",
         "price": 1499.00,
         "original_price": 1599.00,
-        "image": "http://localhost:8000/images/ahuna-mutton.png",
+        "image": "http://api.mrmutton.com/images/ahuna-mutton.png",
         "category": "Mutton Handi"
     },
     {
@@ -171,7 +171,7 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 6 Pieces",
         "price": 799.00,
         "original_price": 899.00,
-        "image": "http://localhost:8000/images/ahuna-mutton.png",
+        "image": "http://api.mrmutton.com/images/ahuna-mutton.png",
         "category": "Mutton Handi"
     },
     # Chicken Handi
@@ -181,7 +181,7 @@ SAMPLE_PRODUCTS = [
         "description": "12 Piece - Large cum Medium",
         "price": 799.00,
         "original_price": 899.00,
-        "image": "http://localhost:8000/images/Ahuna-Chicken-Handi.png",
+        "image": "http://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
         "category": "Chicken Handi"
     },
     {
@@ -190,7 +190,7 @@ SAMPLE_PRODUCTS = [
         "description": "6 Piece Chicken - Large cum Medium",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "http://localhost:8000/images/Ahuna-Chicken-Handi.png",
+        "image": "http://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
         "category": "Chicken Handi"
     },
     {
@@ -199,7 +199,7 @@ SAMPLE_PRODUCTS = [
         "description": "4 Piece Chicken and Rice",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "http://localhost:8000/images/Ahuna-Chicken-Handi.png",
+        "image": "http://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
         "category": "Chicken Handi"
     },
     # Add-ons
@@ -209,7 +209,7 @@ SAMPLE_PRODUCTS = [
         "description": "Basmati Steam Rice",
         "price": 150.00,
         "original_price": 200.00,
-        "image": "http://localhost:8000/images/Steamed-Basmati-Rice.png",
+        "image": "http://api.mrmutton.com/Steamed-Basmati-Rice.png",
         "category": "Add-ons"
     },
     {
@@ -218,7 +218,7 @@ SAMPLE_PRODUCTS = [
         "description": "Fresh Tawa Roti",
         "price": 20.00,
         "original_price": 30.00,
-        "image": "http://localhost:8000/images/Tawa-Roti.png",
+        "image": "http://api.mrmutton.com/images/Tawa-Roti.png",
         "category": "Add-ons"
     },
     # Combo
@@ -228,142 +228,142 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 4 Pieces + Chicken 4 Pieces",
         "price": 1099.00,
         "original_price": 1199.00,
-        "image": "http://localhost:8000/images/Combo.png",
+        "image": "http://api.mrmutton.com/images/Combo.png",
         "category": "Combo"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "combo-mutton-chicken-large",
         "name": "Ahuna Chicken & Mutton Handi",
         "description": "Chicken 6 Pieces + Mutton 6 Pieces",
         "price": 1599.00,
         "original_price": 1799.00,
-        "image": "http://localhost:8000/images/Combo.png",
+        "image": "http://api.mrmutton.com/images/Combo.png",
         "category": "Combo"
     },
 
     # Fish
     {
-        "id": "combo-mutton-chicken",
+        "id": "fish-curry",
         "name": "Fish Curry(Katla/Rohu)",
         "description": "4 Pieces Grilled ans Cooked in Mustard Masala Gravy",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "http://localhost:8000/images/Fish-Curry.png",
+        "image": "http://api.mrmutton.com/images/Fish-Curry.png",
         "category": "Fish"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "prawn-curry",
         "name": "Prawn (ITC) Curry",
         "description": "15 Medium Pieces Grilled and Cooked in Sabut Garam Masala",
         "price": 799.00,
         "original_price": 999.00,
-        "image": "http://localhost:8000/images/Prawn-Curry.png",
+        "image": "http://api.mrmutton.com/images/Prawn-Curry.png",
         "category": "Fish"
     },
 
     # Veg
     {
-        "id": "combo-mutton-chicken",
+        "id": "kadhai-paneer-half",
         "name": "Kadhai Paneer (Half)",
         "description": "Serves 1-2 Person.(200gm Amul Paneer)",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "http://localhost:8000/images/Kadhai-Paneer.png",
+        "image": "http://api.mrmutton.com/images/Kadhai-Paneer.png",
         "category": "Veg"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "kadhai-paneer-full",
         "name": "Kadhai Paneer (Full)",
         "description": "Serves 3-4 Person.(400g Amul Paneer)",
         "price": 799.00,
         "original_price": 899.00,
-        "image": "http://localhost:8000/images/Kadhai-Paneer.png",
+        "image": "http://api.mrmutton.com/images/Kadhai-Paneer.png",
         "category": "Veg"
     },
 
     # Extras
     {
-        "id": "combo-mutton-chicken",
+        "id": "dhaniya-chutney",
         "name": "Dhaniya Chutney",
         "description": "Dhaniya Base, Garlic Chilly, Ginger, Tomato & Salt",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "http://localhost:8000/images/Chutney-Dhaniya.png",
+        "image": "http://api.mrmutton.com/images/Chutney-Dhaniya.png",
         "category": "Extras"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "masala-raita",
         "name": "Masala Raita",
         "description": "Smooth, Spiced, Refreshing Curd Side -Serves 1 Person",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "http://localhost:8000/images/Masala-Raita.png",
+        "image": "http://api.mrmutton.com/images/Masala-Raita.png",
         "category": "Extras"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "boondi-raita",
         "name": "Boondi Raita",
         "description": "Curd with Crispy Haldiram Pearls- Serves 1 Person",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "http://localhost:8000/images/Boondi-Raita.png",
+        "image": "http://api.mrmutton.com/images/Boondi-Raita.png",
         "category": "Extras"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "onion-raita",
         "name": "Onion Raita",
         "description": "Curd with Crunchy Chopped Onions",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "http://localhost:8000/images/Onion-Raita.png",
+        "image": "http://api.mrmutton.com/images/Onion-Raita.png",
         "category": "Extras"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "gulab-jamun-4-pieces",
         "name": "Gulab Jamun (4 Pieces)",
         "description": "Family Pack",
         "price": 199.00,
         "original_price": 249.00,
-        "image": "http://localhost:8000/images/gulab-jamun4.jpeg",
+        "image": "http://api.mrmutton.com/images/gulab-jamun4.jpeg",
         "category": "Extras"
     },
     {
-        "id": "combo-chicken-mutton-2",
+        "id": "gulab-jamun-1-piece",
         "name": "Gulab Jamun(1 Piece)",
         "description": "Gulab Jamun",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "http://localhost:8000/images/gulab-jamun1.jpeg",
+        "image": "http://api.mrmutton.com/images/gulab-jamun1.jpeg",
         "category": "Extras"
     },
     
 
     # Thalis
     {
-        "id": "combo-mutton-chicken",
+        "id": "mutton-thali",
         "name": "Mutton Thali",
         "description": "Ahuna Mutton(3 Pcs), Steamed Basmati Rice, Lachha Onion, Lemon Slice",
         "price": 549.00,
         "original_price": 649.00,
-        "image": "http://localhost:8000/images/Mutton-Thali.png",
+        "image": "http://api.mrmutton.com/images/Mutton-Thali.png",
         "category": "Thali"
     },
     {
-        "id": "combo-mutton-chicken",
+        "id": "chicken-thali",
         "name": "Chicken Thali",
         "description": "4 Piece Chicken and Rice",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "http://localhost:8000/images/Chicken-Thali.png",
+        "image": "http://api.mrmutton.com/images/Chicken-Thali.png",
         "category": "Thali"
     },
     {
-        "id": "combo-mutton-chicken",
+        "id": "fish-thali",
         "name": "Fish Thali",
         "description": "3 Piece Fish, Steamed Basmati Rice, Lachha Onion, Lemon Slice",
         "price": 549.00,
         "original_price": 649.00,
-        "image": "http://localhost:8000/images/Fish-Thali.png",
+        "image": "http://api.mrmutton.com/images/Fish-Thali.png",
         "category": "Thali"
     },
 
@@ -378,21 +378,21 @@ SAMPLE_PRODUCTS = [
     #     "category": "Snacks"
     # },
     {
-        "id": "combo-mutton-chicken",
+        "id": "mutton-seekh-kebab",
         "name": "Mutton Seekh Kebab",
         "description": "A wholesome Serving of grilled Mutton seekh kebabs, crafted from tender ground Mutton for lean protein and seasoned for balanced flavour.Paired with vitamin-rich onions and a fresh, herb-packed green chutney to add natural goodness.(4 Pieces)",
         "price": 399.00,
         "original_price": 499.00,
-        "image": "http://localhost:8000/images/Mutton-Seekh-Kebab.png",
+        "image": "http://api.mrmutton.com/images/Mutton-Seekh-Kebab.png",
         "category": "Snacks"
     },
     {
-        "id": "combo-mutton-chicken",
+        "id": "chicken-seekh-kebab",
         "name": "Chicken Seekh Kebab",
         "description": "A wholesome Serving of grilled Chicken seekh kebabs, crafted from tender ground chicken for lean protein and seasoned for balanced flavour.Paired with vitamin-rich onions and a fresh, herb-packed green chutney to add natural goodness.(4) Pieces)",
         "price": 299.00,
         "original_price": 399.00,
-        "image": "http://localhost:8000/images/Chicken-Seekh-Kebab.png",
+        "image": "http://api.mrmutton.com/images/Chicken-Seekh-Kebab.png",
         "category": "Snacks"
     },
     # {
@@ -405,12 +405,12 @@ SAMPLE_PRODUCTS = [
     #     "category": "Snacks"
     # },
     {
-        "id": "combo-mutton-chicken",
+        "id": "mutton-kaleji",
         "name": "Mutton Kaleji",
         "description": "6 Pieces of Mutton Kaleji",
         "price": 399.00,
         "original_price": 499.00,
-        "image": "http://localhost:8000/images/Mutton-Kaleji.png",
+        "image": "http://api.mrmutton.com/images/Mutton-Kaleji.png",
         "category": "Snacks"
     },
 ]
