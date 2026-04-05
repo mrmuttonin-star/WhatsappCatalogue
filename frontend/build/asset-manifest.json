@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.14f120f9.css",
-    "main.js": "/static/js/main.1a565bff.js",
+    "main.js": "/static/js/main.e1a904c6.js",
     "static/media/cutlery.png": "/static/media/cutlery.718967311fc3ba0641a2.png",
     "static/media/Pyaj.png": "/static/media/Pyaj.c5ae314203e988ee9199.png",
     "static/media/Green_Chutney.png": "/static/media/Green_Chutney.fe8cecc3ed45be25b066.png",
@@ -9,10 +9,10 @@
     "static/media/gulab-jamun.jpeg": "/static/media/gulab-jamun.daaaa5ae150acde8bc4e.jpeg",
     "index.html": "/index.html",
     "main.14f120f9.css.map": "/static/css/main.14f120f9.css.map",
-    "main.1a565bff.js.map": "/static/js/main.1a565bff.js.map"
+    "main.e1a904c6.js.map": "/static/js/main.e1a904c6.js.map"
   },
   "entrypoints": [
     "static/css/main.14f120f9.css",
-    "static/js/main.1a565bff.js"
+    "static/js/main.e1a904c6.js"
   ]
 }
