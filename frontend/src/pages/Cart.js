@@ -97,7 +97,9 @@ const Cart = () => {
                     {/* Quantity Controls */}
                     <div className="flex items-center gap-2 bg-[#202C33] rounded-full px-2 py-1 border border-[#2A3942]">
                       <button
-                        onClick={() => removeFromCart(item.product_id)}
+                        onClick={() =>
+                          removeFromCart(item.product_id, item.addons)
+                        }
                         className="p-1 hover:bg-[#2A3942] rounded-full"
                       >
                         <Minus className="w-4 h-4 text-[#E9EDEF]" />
@@ -114,7 +116,8 @@ const Cart = () => {
                             name: item.name,
                             price: item.price,
                             image: item.image,
-                            addons: item.addons,
+                            addons: item.addons || [],
+                            quantity: 1,
                           })
                         }
                         className="p-1 hover:bg-[#2A3942] rounded-full"
@@ -368,4 +371,3 @@ export default Cart;
 // };
 
 // export default Cart;
-

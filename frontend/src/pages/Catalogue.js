@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { ShoppingCart, Plus, Minus, ArrowLeft } from "lucide-react";
 import { useCart } from "../context/CartContext";
@@ -22,44 +22,43 @@ const Catalogue = () => {
     useCart();
   const navigate = useNavigate();
 
-  
-//   const fetchProducts = useCallback(async () => {
-//     try {
-//       const response = await axios.get(`${API}/api/products`);
-//       const data = response.data?.data || response.data?.products || [];
-//       setProducts(Array.isArray(data) ? data : []);
-//       console.log("API RESPONSE:", response.data);
-//       console.log("FULL RESPONSE:", response);
-//       console.log("DATA:", response.data);
-//       console.log("PRODUCTS:", products);
-// console.log("IS ARRAY:", Array.isArray(products));
-//     } catch (error) {
-//       console.error("Failed to fetch products:", error);
-//       toast.error("Failed to load products");
-//     } finally {
-//       setLoading(false);
-//     }
-//  }, [products]);
+  //   const fetchProducts = useCallback(async () => {
+  //     try {
+  //       const response = await axios.get(`${API}/api/products`);
+  //       const data = response.data?.data || response.data?.products || [];
+  //       setProducts(Array.isArray(data) ? data : []);
+  //       console.log("API RESPONSE:", response.data);
+  //       console.log("FULL RESPONSE:", response);
+  //       console.log("DATA:", response.data);
+  //       console.log("PRODUCTS:", products);
+  // console.log("IS ARRAY:", Array.isArray(products));
+  //     } catch (error) {
+  //       console.error("Failed to fetch products:", error);
+  //       toast.error("Failed to load products");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //  }, [products]);
 
   useEffect(() => {
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get(`${API}/api/products`);
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${API}/api/products`);
 
-      // ✅ Direct data use karo
-      setProducts(Array.isArray(response.data) ? response.data : []);
+        // ✅ Direct data use karo
+        setProducts(Array.isArray(response.data) ? response.data : []);
 
-      console.log("API RESPONSE:", response.data);
-    } catch (error) {
-      console.error("Failed to fetch products:", error);
-      toast.error("Failed to load products");
-    } finally {
-      setLoading(false);
-    }
-  };
+        console.log("API RESPONSE:", response.data);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+        toast.error("Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  fetchProducts();
-}, []);
+    fetchProducts();
+  }, []);
 
   const groupedProducts = (Array.isArray(products) ? products : []).reduce(
     (acc, product) => {
@@ -73,9 +72,29 @@ const Catalogue = () => {
   );
 
   const handleAddToCart = (product) => {
-    // Open customization modal instead of direct add
-    setSelectedProduct(product);
-    setShowCustomization(true);
+    // const quantity = getItemQuantity(product.id);
+    const quantity = getItemQuantity(product.id, []);
+    // 🟢 SIMPLE ITEM → direct add
+    if (!product.hasCustomization) {
+      addToCart({
+  ...product,
+  addons: [], // ⭐ MUST
+});
+      return;
+    }
+
+    // 🟢 FIRST TIME → open popup
+    if (quantity === 0) {
+      setSelectedProduct(product);
+      setShowCustomization(true);
+    }
+    // 🟢 ALREADY ADDED → direct increase
+    else {
+      addToCart({
+  ...product,
+  addons: [],
+});
+    }
   };
 
   const handleCustomizationComplete = (productWithAddons) => {
@@ -170,7 +189,7 @@ const Catalogue = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {categoryProducts.map((product) => {
-                const quantity = getItemQuantity(product.id);
+                const quantity = getItemQuantity(product.id, []);
                 return (
                   <div
                     key={product.id}
@@ -230,7 +249,7 @@ const Catalogue = () => {
                               data-testid={`quantity-controls-${product.id}`}
                             >
                               <button
-                                onClick={() => removeFromCart(product.id)}
+                                onClick={() => removeFromCart(product.id, [])}
                                 className="p-1.5 hover:bg-[#2A3942] rounded-full transition-colors"
                                 data-testid={`minus-button-${product.id}`}
                               >

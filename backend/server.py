@@ -22,6 +22,7 @@ app = FastAPI()
 
 origins = [
     "https://whatsappcatalogue.mrmutton.com",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
@@ -36,7 +37,7 @@ app.add_middleware(
 BASE_DIR = Path(__file__).resolve().parent
 
 
-GOOGLE_SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycby4GLkhPuUFJ52rSiHdwEt6BVuxm0NGodJn3CQKfwPuD2FOZi5G9RpW-l1QkTn22XnvVg/exec"
+GOOGLE_SHEET_WEBHOOK = "https://script.google.com/macros/s/AKfycbxj6dbRf10TRSlSlZnBMPjIf426GshbybGfreLopVtjDtL1lyBd8e69yEik3yCHsTL1Dg/exec"
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -71,8 +72,10 @@ class Product(BaseModel):
     original_price: Optional[float] = None
     image: str
     category: str
+    hasCustomization: Optional[bool] = False 
 
 class Addon(BaseModel):
+    id: Optional[str] = None
     name: str
     price: float
 
@@ -84,19 +87,23 @@ class CartItem(BaseModel):
     quantity: int
     image: str
     addons: Optional[List[Addon]] = []
+    spice_level: Optional[str] = None
     
 
 
 class OrderCreate(BaseModel):
     customer_name: str
     customer_phone: str
-    customer_address: str
+    customer_address: str 
+    auto_address: Optional[str] = None
+    manual_address: Optional[str] = None
     items: List[CartItem]
     items_subtotal: float
     packaging_charge: float = 15.0
     delivery_charge: float = 0.0
     gst_amount: float
     total_amount: float
+    token_amount: Optional[float] = 0.0
     payment_method: str  # "COD" or "ONLINE"
     delivery_location: Optional[dict] = None
     scheduled_date: Optional[str] = None
@@ -114,12 +121,15 @@ class Order(BaseModel):
     customer_name: str
     customer_phone: str
     customer_address: str
+    auto_address: Optional[str] = None
+    manual_address: Optional[str] = None
     items: List[CartItem]
     items_subtotal: float
     packaging_charge: float = 15.0
     delivery_charge: float = 0.0
     gst_amount: float
     total_amount: float
+    token_amount: Optional[float] = 0.0
     payment_method: str
     payment_status: str  # "PENDING", "PAID", "COD"
     order_status: str = "CONFIRMED"  # "CONFIRMED", "PROCESSING", "DELIVERED"
@@ -153,8 +163,9 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 3 Pieces",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/ahuna-mutton.png",
-        "category": "Mutton Handi"
+        "image": "http://localhost:8000/images/ahuna-mutton.png",
+        "category": "Mutton Handi",
+        "hasCustomization": True
     },
     {
         "id": "mutton-1000",
@@ -162,8 +173,9 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 12 Pieces",
         "price": 1499.00,
         "original_price": 1599.00,
-        "image": "https://api.mrmutton.com/images/ahuna-mutton.png",
-        "category": "Mutton Handi"
+        "image": "http://localhost:8000/images/ahuna-mutton.png",
+        "category": "Mutton Handi",
+        "hasCustomization": True
     },
     {
         "id": "mutton-500",
@@ -171,8 +183,9 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 6 Pieces",
         "price": 799.00,
         "original_price": 899.00,
-        "image": "https://api.mrmutton.com/images/ahuna-mutton.png",
-        "category": "Mutton Handi"
+        "image": "http://localhost:8000/images/ahuna-mutton.png",
+        "category": "Mutton Handi",
+        "hasCustomization": True
     },
     # Chicken Handi
     {
@@ -181,8 +194,9 @@ SAMPLE_PRODUCTS = [
         "description": "12 Piece - Large cum Medium",
         "price": 799.00,
         "original_price": 899.00,
-        "image": "https://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
-        "category": "Chicken Handi"
+        "image": "http://localhost:8000/images/Ahuna-Chicken-Handi.png",
+        "category": "Chicken Handi",
+        "hasCustomization": True
     },
     {
         "id": "chicken-500",
@@ -190,8 +204,9 @@ SAMPLE_PRODUCTS = [
         "description": "6 Piece Chicken - Large cum Medium",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
-        "category": "Chicken Handi"
+        "image": "http://localhost:8000/images/Ahuna-Chicken-Handi.png",
+        "category": "Chicken Handi",
+        "hasCustomization": True
     },
     {
         "id": "chicken-thali",
@@ -199,8 +214,9 @@ SAMPLE_PRODUCTS = [
         "description": "4 Piece Chicken and Rice",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
-        "category": "Chicken Handi"
+        "image": "http://localhost:8000/images/Ahuna-Chicken-Handi.png",
+        "category": "Chicken Handi",
+        "hasCustomization": True
     },
 
     {
@@ -209,8 +225,9 @@ SAMPLE_PRODUCTS = [
         "description": "Basmati Steam Rice",
         "price": 150.00,
         "original_price": 200.00,
-        "image": "https://api.mrmutton.com/Steamed-Basmati-Rice.png",
-        "category": "Add-ons"
+        "image": "http://localhost:8000/Steamed-Basmati-Rice.png",
+        "category": "Add-ons",
+        "hasCustomization": False
     },
     {
         "id": "tawa-roti",
@@ -218,8 +235,9 @@ SAMPLE_PRODUCTS = [
         "description": "Fresh Tawa Roti",
         "price": 20.00,
         "original_price": 30.00,
-        "image": "https://api.mrmutton.com/images/Tawa-Roti.png",
-        "category": "Add-ons"
+        "image": "http://localhost:8000/images/Tawa-Roti.png",
+        "category": "Add-ons",
+        "hasCustomization": False
     },
     # Combo
     {
@@ -228,8 +246,9 @@ SAMPLE_PRODUCTS = [
         "description": "Mutton 4 Pieces + Chicken 4 Pieces",
         "price": 1099.00,
         "original_price": 1199.00,
-        "image": "https://api.mrmutton.com/images/Combo.png",
-        "category": "Combo"
+        "image": "http://localhost:8000/images/Combo.png",
+        "category": "Combo",
+        "hasCustomization": True
     },
     {
         "id": "combo-mutton-chicken-large",
@@ -237,8 +256,9 @@ SAMPLE_PRODUCTS = [
         "description": "Chicken 6 Pieces + Mutton 6 Pieces",
         "price": 1599.00,
         "original_price": 1799.00,
-        "image": "https://api.mrmutton.com/images/Combo.png",
-        "category": "Combo"
+        "image": "http://localhost:8000/images/Combo.png",
+        "category": "Combo",
+        "hasCustomization": True
     },
 
     # Fish
@@ -248,8 +268,9 @@ SAMPLE_PRODUCTS = [
         "description": "4 Pieces Grilled ans Cooked in Mustard Masala Gravy",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/Fish-Curry.png",
-        "category": "Fish"
+        "image": "http://localhost:8000/images/Fish-Curry.png",
+        "category": "Fish",
+        "hasCustomization": True
     },
     {
         "id": "prawn-curry",
@@ -257,8 +278,9 @@ SAMPLE_PRODUCTS = [
         "description": "15 Medium Pieces Grilled and Cooked in Sabut Garam Masala",
         "price": 799.00,
         "original_price": 999.00,
-        "image": "https://api.mrmutton.com/images/Prawn-Curry.png",
-        "category": "Fish"
+        "image": "http://localhost:8000/images/Prawn-Curry.png",
+        "category": "Fish",
+        "hasCustomization": True
     },
 
     # Veg
@@ -268,8 +290,9 @@ SAMPLE_PRODUCTS = [
         "description": "Serves 1-2 Person.(200gm Amul Paneer)",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/Kadhai-Paneer.png",
-        "category": "Veg"
+        "image": "http://localhost:8000/images/Kadhai-Paneer.png",
+        "category": "Veg",
+        "hasCustomization": True
     },
     {
         "id": "kadhai-paneer-full",
@@ -277,8 +300,9 @@ SAMPLE_PRODUCTS = [
         "description": "Serves 3-4 Person.(400g Amul Paneer)",
         "price": 799.00,
         "original_price": 899.00,
-        "image": "https://api.mrmutton.com/images/Kadhai-Paneer.png",
-        "category": "Veg"
+        "image": "http://localhost:8000/images/Kadhai-Paneer.png",
+        "category": "Veg",
+        "hasCustomization": True
     },
 
     # Extras
@@ -288,8 +312,9 @@ SAMPLE_PRODUCTS = [
         "description": "Dhaniya Base, Garlic Chilly, Ginger, Tomato & Salt",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "https://api.mrmutton.com/images/Chutney-Dhaniya.png",
-        "category": "Extras"
+        "image": "http://localhost:8000/images/Chutney-Dhaniya.png",
+        "category": "Extras",
+        "hasCustomization": False
     },
     {
         "id": "masala-raita",
@@ -297,8 +322,9 @@ SAMPLE_PRODUCTS = [
         "description": "Smooth, Spiced, Refreshing Curd Side -Serves 1 Person",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "https://api.mrmutton.com/images/Masala-Raita.png",
-        "category": "Extras"
+        "image": "http://localhost:8000/images/Masala-Raita.png",
+        "category": "Extras",
+        "hasCustomization": False
     },
     {
         "id": "boondi-raita",
@@ -306,8 +332,9 @@ SAMPLE_PRODUCTS = [
         "description": "Curd with Crispy Haldiram Pearls- Serves 1 Person",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "https://api.mrmutton.com/images/Boondi-Raita.png",
-        "category": "Extras"
+        "image": "http://localhost:8000/images/Boondi-Raita.png",
+        "category": "Extras",
+        "hasCustomization": False
     },
     {
         "id": "onion-raita",
@@ -315,8 +342,9 @@ SAMPLE_PRODUCTS = [
         "description": "Curd with Crunchy Chopped Onions",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "https://api.mrmutton.com/images/Onion-Raita.png",
-        "category": "Extras"
+        "image": "http://localhost:8000/images/Onion-Raita.png",
+        "category": "Extras",
+        "hasCustomization": False
     },
     {
         "id": "gulab-jamun-4-pieces",
@@ -324,8 +352,9 @@ SAMPLE_PRODUCTS = [
         "description": "Family Pack",
         "price": 199.00,
         "original_price": 249.00,
-        "image": "https://api.mrmutton.com/images/gulab-jamun4.jpeg",
-        "category": "Extras"
+        "image": "http://localhost:8000/images/gulab-jamun4.jpeg",
+        "category": "Extras",
+        "hasCustomization": False
     },
     {
         "id": "gulab-jamun-1-piece",
@@ -333,11 +362,9 @@ SAMPLE_PRODUCTS = [
         "description": "Gulab Jamun",
         "price": 69.00,
         "original_price": 89.00,
-        "image": "https://api.mrmutton.com/images/gulab-jamun1.jpeg",
-        "category": "Extras"
-    },
-    
-
+        "image": "http://localhost:8000/images/gulab-jamun1.jpeg",
+        "category": "Extras",
+        "hasCustomization": False    },
     # Thalis
     {
         "id": "mutton-thali",
@@ -345,8 +372,9 @@ SAMPLE_PRODUCTS = [
         "description": "Ahuna Mutton(3 Pcs), Steamed Basmati Rice, Lachha Onion, Lemon Slice",
         "price": 549.00,
         "original_price": 649.00,
-        "image": "https://api.mrmutton.com/images/Mutton-Thali.png",
-        "category": "Thali"
+        "image": "http://localhost:8000/images/Mutton-Thali.png",
+        "category": "Thali",
+        "hasCustomization": True
     },
     {
         "id": "chicken-thali",
@@ -354,8 +382,9 @@ SAMPLE_PRODUCTS = [
         "description": "4 Piece Chicken and Rice",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/Chicken-Thali.png",
-        "category": "Thali"
+        "image": "http://localhost:8000/images/Chicken-Thali.png",
+        "category": "Thali",
+        "hasCustomization": True
     },
     {
         "id": "fish-thali",
@@ -363,28 +392,19 @@ SAMPLE_PRODUCTS = [
         "description": "3 Piece Fish, Steamed Basmati Rice, Lachha Onion, Lemon Slice",
         "price": 549.00,
         "original_price": 649.00,
-        "image": "https://api.mrmutton.com/images/Fish-Thali.png",
-        "category": "Thali"
+        "image": "http://localhost:8000/images/Fish-Thali.png",
+        "category": "Thali",
+        "hasCustomization": True
     },
-
-    # Snacks
-    # {
-    #     "id": "combo-mutton-chicken",
-    #     "name": "Chicken Seekh Kebab",
-    #     "description": "A wholesome Serving of grilled Chicken seekh kebabs, crafted from tender ground chicken for lean protein and seasoned for balanced flavour.Paired with vitamin-rich onions and a fresh, herb-packed green chutney to add natural goodness.(7 Pieces)",
-    #     "price": 499.00,
-    #     "original_price": 599.00,
-    #     "image": "http://localhost:8000/images/Chicken-Seekh-Kebab.png",
-    #     "category": "Snacks"
-    # },
     {
         "id": "mutton-seekh-kebab",
         "name": "Mutton Seekh Kebab",
         "description": "A wholesome Serving of grilled Mutton seekh kebabs, crafted from tender ground Mutton for lean protein and seasoned for balanced flavour.Paired with vitamin-rich onions and a fresh, herb-packed green chutney to add natural goodness.(4 Pieces)",
         "price": 399.00,
         "original_price": 499.00,
-        "image": "https://api.mrmutton.com/images/Mutton-Seekh-Kebab.png",
-        "category": "Snacks"
+        "image": "http://localhost:8000/images/Mutton-Seekh-Kebab.png",
+        "category": "Snacks",
+        "hasCustomization": True
     },
     {
         "id": "chicken-seekh-kebab",
@@ -392,8 +412,19 @@ SAMPLE_PRODUCTS = [
         "description": "A wholesome Serving of grilled Chicken seekh kebabs, crafted from tender ground chicken for lean protein and seasoned for balanced flavour.Paired with vitamin-rich onions and a fresh, herb-packed green chutney to add natural goodness.(4) Pieces)",
         "price": 299.00,
         "original_price": 399.00,
-        "image": "https://api.mrmutton.com/images/Chicken-Seekh-Kebab.png",
-        "category": "Snacks"
+        "image": "http://localhost:8000/images/Chicken-Seekh-Kebab.png",
+        "category": "Snacks",
+        "hasCustomization": True
+    },
+    {
+        "id": "Mutton Kaleji",
+        "name": "Mutton Kaleji",
+        "description": "A wholesome Serving of grilled Mutton kaleji, crafted from tender ground mutton for lean protein and seasoned for balanced flavour.Paired with vitamin-rich onions and a fresh, herb-packed green chutney to add natural goodness.(4) Pieces)",
+        "price": 299.00,
+        "original_price": 399.00,
+        "image": "http://localhost:8000/images/Mutton-Kaleji.png",
+        "category": "Snacks",
+        "hasCustomization": True
     },
 ]
 
@@ -487,7 +518,9 @@ async def create_order(order_data: OrderCreate):
                         [f"{a.name} ₹{a.price}" for a in item.addons]
                 ) + ")"
 
-                formatted += f"{item.name} x{item.quantity} = ₹{item.price * item.quantity}{addons_text}\n"
+                spice_text = f" | Spice: {item.spice_level}" if item.spice_level else ""
+
+                formatted += f"{item.name} x{item.quantity} = ₹{item.price * item.quantity}{addons_text}{spice_text}\n"
 
             return formatted
 
@@ -495,6 +528,8 @@ async def create_order(order_data: OrderCreate):
             "order_id": order_obj.id,
             "customer_name": order_obj.customer_name,
             "phone": order_obj.customer_phone,
+            "auto_address": order_obj.auto_address or "",
+            "manual_address": order_obj.manual_address or "",
             "address": order_obj.customer_address,
             "location_link": google_maps_link,
             "items": format_items(order_obj.items),

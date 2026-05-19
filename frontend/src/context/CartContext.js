@@ -64,6 +64,7 @@ export const CartProvider = ({ children }) => {
           quantity: product.quantity || 1,
           image: product.image,
           addons: Array.isArray(product.addons) ? product.addons : [],
+          spiceLevel: product.spiceLevel || "medium", // ⭐ ADD THIS
         },
       ];
     });
@@ -106,8 +107,24 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const getItemQuantity = (productId) => {
-    const item = cart.find((item) => item.product_id === productId);
+  // const getItemQuantity = (productId) => {
+  //   const item = cart.find((item) => item.product_id === productId);
+  //   return item ? item.quantity : 0;
+  // };
+  const getItemQuantity = (productId, addons = []) => {
+    const addonIds = (addons || [])
+      .map((a) => a.id)
+      .sort()
+      .join(",");
+
+    const item = cart.find((item) => {
+      const itemAddonIds = (item.addons || [])
+        .map((a) => a.id)
+        .sort()
+        .join(",");
+      return item.product_id === productId && itemAddonIds === addonIds;
+    });
+
     return item ? item.quantity : 0;
   };
 

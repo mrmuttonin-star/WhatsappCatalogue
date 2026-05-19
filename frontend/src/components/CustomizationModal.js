@@ -14,14 +14,14 @@ const ADD_ONS = {
       name: "Chutney",
       description: "50gm",
       price: 19,
-      image:GreenChutney,
+      image: GreenChutney,
     },
     {
       id: "lachha-pyaj",
       name: "Lachha Pyaj",
       description: "Fresh onion rings",
       price: 9,
-      image:LachhaPyaj,
+      image: LachhaPyaj,
     },
   ],
   desserts: [
@@ -30,7 +30,7 @@ const ADD_ONS = {
       name: "Gulab Jamun",
       description: "2 pieces",
       price: 49,
-      image:GulabJamun,
+      image: GulabJamun,
     },
   ],
   mealEssentials: [
@@ -39,7 +39,7 @@ const ADD_ONS = {
       name: "Cutlery Set",
       description: "Spoon, fork, napkin",
       price: 5,
-      image:CutlerySet,
+      image: CutlerySet,
     },
   ],
 };
@@ -47,6 +47,7 @@ const ADD_ONS = {
 const CustomizationModal = ({ isOpen, onClose, product, onAddToCart }) => {
   const [selectedAddons, setSelectedAddons] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [spiceLevel, setSpiceLevel] = useState("medium");
 
   useEffect(() => {
     if (isOpen) {
@@ -86,10 +87,20 @@ const CustomizationModal = ({ isOpen, onClose, product, onAddToCart }) => {
   };
 
   const handleAddToCart = () => {
+    const generateCartId = () => {
+      const addonIds = selectedAddons
+        .map((a) => a.id)
+        .sort()
+        .join("-");
+      return `${product.id}-${addonIds}`;
+    };
+
     onAddToCart({
       ...product,
+      cartId: generateCartId(),
       quantity,
       addons: selectedAddons,
+      spiceLevel, // ⭐ ADD THIS
     });
     toast.success(`${product.name} added to cart`);
     onClose();
@@ -206,6 +217,32 @@ const CustomizationModal = ({ isOpen, onClose, product, onAddToCart }) => {
                     </div>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Spice Level Section */}
+          <div className="mb-6">
+            <h3 className="text-base font-semibold text-[#E9EDEF] mb-2">
+              Spice Level
+            </h3>
+            <p className="text-xs text-[#8696A0] mb-3">
+              Choose your preference
+            </p>
+
+            <div className="flex gap-3">
+              {["low", "medium", "high"].map((level) => (
+                <button
+                  key={level}
+                  onClick={() => setSpiceLevel(level)}
+                  className={`px-4 py-2 rounded-full border text-sm capitalize transition-all ${
+                    spiceLevel === level
+                      ? "bg-[#25D366] text-white border-[#25D366]"
+                      : "bg-[#111B21] text-[#8696A0] border-[#2A3942]"
+                  }`}
+                >
+                  {level}
+                </button>
               ))}
             </div>
           </div>
@@ -351,7 +388,13 @@ const CustomizationModal = ({ isOpen, onClose, product, onAddToCart }) => {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2 bg-[#111B21] rounded-full px-3 py-1.5 border border-[#2A3942]">
               <button
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                onClick={() => {
+                  if (quantity === 1) {
+                    onClose(); // modal band ho jayega (item add nahi hoga)
+                  } else {
+                    setQuantity(quantity - 1);
+                  }
+                }}
                 className="p-1 hover:bg-[#2A3942] rounded-full transition-colors"
                 data-testid="quantity-minus"
               >

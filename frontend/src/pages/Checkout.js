@@ -370,11 +370,18 @@ const Checkout = () => {
   const [location, setLocation] = useState(null);
   const [schedule, setSchedule] = useState(null);
   const [showCODTokenModal, setShowCODTokenModal] = useState(false);
+  const [manualAddress, setManualAddress] = useState("");
 
   // Calculate all charges
   const itemsSubtotal = getItemsSubtotal();
   const packagingCharge = CHARGES.PACKAGING;
   const gstAmount = (itemsSubtotal * CHARGES.GST_PERCENT) / 100;
+
+  const autoAddress = location?.address || "";
+  const manualAddr = manualAddress || "";
+
+  // Map ke liye (priority auto ko do)
+  const finalAddress = autoAddress || manualAddr;
 
   const deliveryCharge = location
     ? location.distance <= CHARGES.FREE_DELIVERY_RADIUS_KM
@@ -407,26 +414,30 @@ const Checkout = () => {
 
         // addons text
         const addonsText =
-          item.addons && item.addons.length > 0
+          item.addons?.length > 0
             ? "\n   ➤ Add-ons:\n" +
               item.addons
                 .map((a) => `      - ${a.name} (₹${a.price})`)
                 .join("\n")
             : "";
 
-        return `• ${item.name} x${item.quantity} = ₹${itemTotal.toFixed(2)}${addonsText}`;
+        const spice = item.spice_level || item.spiceLevel;
+
+        const spiceText = spice ? `\n   🌶️ Spice Level: ${spice}` : "";
+
+        return `• ${item.name} x${item.quantity} = ₹${itemTotal.toFixed(2)}${addonsText}${spiceText}`;
       })
       .join("\n\n");
 
     let scheduleText = "ASAP";
 
-if (order.scheduled_date && order.meal_type && order.time_slot) {
-  scheduleText = `
+    if (order.scheduled_date && order.meal_type && order.time_slot) {
+      scheduleText = `
 📅 ${order.scheduled_date}
 🍽️ ${order.meal_type === "lunch" ? "Lunch" : "Dinner"}
 ⏰ ${order.time_slot}
 `;
-}
+    }
 
     const message = `🛒 *NEW ORDER RECEIVED*
 
@@ -437,6 +448,7 @@ Phone: ${order.customer_phone}
 
 📍 *Delivery Address*
 ${order.delivery_location?.address || "N/A"}
+🏠 Address: ${order.manual_address || "N/A"}
 📌 Location: https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(order.customer_address)}
 
 🕒 *Schedule*
@@ -452,7 +464,14 @@ Packaging: ₹${order.packaging_charge.toFixed(2)}
 Delivery: ₹${order.delivery_charge.toFixed(2)}
 GST: ₹${order.gst_amount.toFixed(2)}
 
-🟢 *Total: ₹${order.total_amount.toFixed(2)}*
+ 🟢 *Total: ₹${Number(order.total_amount).toFixed(2)}*
+
+💵 Paid Amount: ₹${Number(order.token_amount || 0).toFixed(2)}
+
+💰 Remaining: ₹${(
+  Number(order.total_amount) -
+  Number(order.token_amount || 0)
+).toFixed(2)}
 
 💳 Payment: ${order.payment_method}
 📌 Status: ${order.payment_status}
@@ -464,6 +483,7 @@ GST: ₹${order.gst_amount.toFixed(2)}
   };
 
   const sendWhatsAppNotification = (order) => {
+    console.log("ORDER DATA 👉", order);
     const whatsappNumber = "919220829266";
     const message = generateWhatsAppMessage(order);
 
@@ -483,7 +503,7 @@ GST: ₹${order.gst_amount.toFixed(2)}
       toast.error("Please fill all required fields");
       return false;
     }
-    if (!location) {
+    if (!location && !manualAddress) {
       toast.error("Please select delivery location");
       return false;
     }
@@ -501,9 +521,12 @@ GST: ₹${order.gst_amount.toFixed(2)}
       console.log("STEP 1");
 
       // Create Razorpay order for ₹100 token
-      const orderResponse = await axios.post(`${API}/api/razorpay/create-order`, {
-        amount: CHARGES.COD_TOKEN * 100,
-      });
+      const orderResponse = await axios.post(
+        `${API}/api/razorpay/create-order`,
+        {
+          amount: CHARGES.COD_TOKEN * 100,
+        },
+      );
 
       console.log("STEP 2");
       console.log("ORDER RESPONSE:", orderResponse.data);
@@ -584,14 +607,27 @@ GST: ₹${order.gst_amount.toFixed(2)}
       const orderData = {
         customer_name: formData.customer_name,
         customer_phone: formData.customer_phone,
-        customer_address: location.address,
-        items: cart,
+        auto_address: autoAddress,
+        manual_address: manualAddr,
+
+        customer_address: finalAddress,
+        delivery_location: location,
+        items: cart.map((item) => ({
+          product_id: item.product_id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+          addons: item.addons || [],
+          spice_level: item.spiceLevel,
+        })),
         items_text: formattedItems,
         items_subtotal: itemsSubtotal,
         packaging_charge: packagingCharge,
         delivery_charge: deliveryCharge,
         gst_amount: gstAmount,
         total_amount: grandTotal,
+        token_amount: method === "COD" ? CHARGES.COD_TOKEN : grandTotal,
         payment_method: method,
         delivery_location: location,
         scheduled_date: schedule?.dateLabel,
@@ -640,10 +676,13 @@ GST: ₹${order.gst_amount.toFixed(2)}
       setLoading(true);
 
       // Create Razorpay order for full amount
-      const orderResponse = await axios.post(`${API}/api/razorpay/create-order`, {
-        // amount: grandTotal,
-        amount: Math.round(grandTotal * 100),
-      });
+      const orderResponse = await axios.post(
+        `${API}/api/razorpay/create-order`,
+        {
+          // amount: grandTotal,
+          amount: Math.round(grandTotal * 100),
+        },
+      );
 
       const { id: order_id, amount, currency, key_id } = orderResponse.data;
 
@@ -794,6 +833,19 @@ GST: ₹${order.gst_amount.toFixed(2)}
           {/* Location Picker */}
           <div className="bg-[#202C33] rounded-xl p-6 border border-[#2A3942]">
             <LocationPicker onLocationSelect={setLocation} />
+          </div>
+          {/* Manual Address Input */}
+          <div className="mt-4">
+            <Label className="text-[#E9EDEF] mb-2 block">
+              Enter Full Address (Manual)
+            </Label>
+            <Input
+              type="text"
+              value={manualAddress}
+              onChange={(e) => setManualAddress(e.target.value)}
+              placeholder="House no, street, landmark..."
+              className="bg-[#2A3942] border-none text-[#E9EDEF] placeholder:text-[#8696A0]"
+            />
           </div>
 
           {/* Schedule Picker */}
