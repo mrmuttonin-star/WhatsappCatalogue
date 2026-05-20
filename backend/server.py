@@ -194,7 +194,7 @@ SAMPLE_PRODUCTS = [
         "description": "12 Piece - Large cum Medium",
         "price": 799.00,
         "original_price": 899.00,
-        "image": "https://api.mrmutton.com/images/ahuna-chicken.png",
+        "image": "https://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
         "category": "Chicken Handi",
         "hasCustomization": True
     },
@@ -204,7 +204,7 @@ SAMPLE_PRODUCTS = [
         "description": "6 Piece Chicken - Large cum Medium",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/ahuna-chicken.png",
+        "image": "https://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
         "category": "Chicken Handi",
         "hasCustomization": True
     },
@@ -214,7 +214,7 @@ SAMPLE_PRODUCTS = [
         "description": "4 Piece Chicken and Rice",
         "price": 499.00,
         "original_price": 599.00,
-        "image": "https://api.mrmutton.com/images/ahuna-chicken.png",
+        "image": "https://api.mrmutton.com/images/Ahuna-Chicken-Handi.png",
         "category": "Chicken Handi",
         "hasCustomization": True
     },
@@ -225,7 +225,7 @@ SAMPLE_PRODUCTS = [
         "description": "Basmati Steam Rice",
         "price": 150.00,
         "original_price": 200.00,
-        "image": "https://api.mrmutton.com/images/steamed-basmati-rice.png",
+        "image": "https://api.mrmutton.com/images/Steamed-Basmati-Rice.png",
         "category": "Add-ons",
         "hasCustomization": False
     },
@@ -235,7 +235,7 @@ SAMPLE_PRODUCTS = [
         "description": "Fresh Tawa Roti",
         "price": 20.00,
         "original_price": 30.00,
-        "image": "https://api.mrmutton.com/images/tawa-roti.png",
+        "image": "https://api.mrmutton.com/images/Tawa-Roti.png",
         "category": "Add-ons",
         "hasCustomization": False
     },
