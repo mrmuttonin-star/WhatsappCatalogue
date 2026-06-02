@@ -1,18 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.22b95473.css",
-    "main.js": "/static/js/main.7e878c5e.js",
+    "main.css": "/static/css/main.6a852073.css",
+    "main.js": "/static/js/main.65049080.js",
     "static/media/cutlery.png": "/static/media/cutlery.718967311fc3ba0641a2.png",
     "static/media/Pyaj.png": "/static/media/Pyaj.c5ae314203e988ee9199.png",
     "static/media/Green_Chutney.png": "/static/media/Green_Chutney.fe8cecc3ed45be25b066.png",
     "static/media/Mr-Logo(9JanFinal) (1).png": "/static/media/Mr-Logo(9JanFinal) (1).97fabff01809579a8005.png",
+    "static/media/fish.png": "/static/media/fish.ba3eb7cdf0fc2c1463b9.png",
+    "static/media/combo.png": "/static/media/combo.3c0a03e6d5ec3f31ffcf.png",
+    "static/media/chicken.png": "/static/media/chicken.5a3acbb2d25ca6af0ad2.png",
+    "static/media/addons.png": "/static/media/addons.36772f5488f6ea6e7620.png",
+    "static/media/mutton.png": "/static/media/mutton.5d7064cc4489e2c1aa18.png",
     "static/media/gulab-jamun.jpeg": "/static/media/gulab-jamun.daaaa5ae150acde8bc4e.jpeg",
     "index.html": "/index.html",
-    "main.22b95473.css.map": "/static/css/main.22b95473.css.map",
-    "main.7e878c5e.js.map": "/static/js/main.7e878c5e.js.map"
+    "main.6a852073.css.map": "/static/css/main.6a852073.css.map",
+    "main.65049080.js.map": "/static/js/main.65049080.js.map"
   },
   "entrypoints": [
-    "static/css/main.22b95473.css",
-    "static/js/main.7e878c5e.js"
+    "static/css/main.6a852073.css",
+    "static/js/main.65049080.js"
   ]
 }
