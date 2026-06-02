@@ -422,7 +422,7 @@ SAMPLE_PRODUCTS = [
         "description": "A wholesome Serving of grilled Mutton kaleji, crafted from tender ground mutton for lean protein and seasoned for balanced flavour.Paired with vitamin-rich onions and a fresh, herb-packed green chutney to add natural goodness.(4) Pieces)",
         "price": 299.00,
         "original_price": 399.00,
-        "image": "https://backendapi.mrmutton.com/images/Mutton-Kaleji.png",
+        "image": "https://backendapi.mrmutton.com/images/Mutton-kaleji.png",
         "category": "Snacks",
         "hasCustomization": True
     },
