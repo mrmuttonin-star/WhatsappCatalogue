@@ -15685,7 +15685,7 @@
         : null;
     },
     Ra = n.p + "static/media/Mr-Logo(9JanFinal) (1).97fabff01809579a8005.png";
-  console.log("API URL:", "https://api.mrmutton.com");
+  console.log("API URL:", "https://backendapi.mrmutton.com");
   const _a = () => {
       const [e, t] = (0, a.useState)([]),
         [n, r] = (0, a.useState)(!0),
@@ -15701,7 +15701,7 @@
       (0, a.useEffect)(() => {
         (async () => {
           try {
-            const e = await ma.get("https://api.mrmutton.com/api/products");
+            const e = await ma.get("https://backendapi.mrmutton.com/api/products");
             (t(Array.isArray(e.data) ? e.data : []),
               console.log("API RESPONSE:", e.data));
           } catch (e) {
@@ -21545,7 +21545,7 @@
         ],
       });
     },
-    yu = "https://api.mrmutton.com",
+    yu = "https://backendapi.mrmutton.com",
     xu = 15,
     wu = 5,
     Eu = 100,
@@ -22517,7 +22517,7 @@
           try {
             r(!0);
             const e = (
-              await ma.get("https://api.mrmutton.com/orders")
+              await ma.get("https://backendapi.mrmutton.com/orders")
             ).data.sort(
               (e, t) => new Date(t.created_at) - new Date(e.created_at),
             );
