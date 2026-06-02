@@ -1,6 +1,22 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { ShoppingCart, Plus, Minus, ArrowLeft } from "lucide-react";
+import {
+  ShoppingCart,
+  Plus,
+  Minus,
+  ArrowLeft,
+  Menu,
+  X,
+  Fish,
+  Drumstick,
+  Soup,
+  PackagePlus,
+} from "lucide-react";
+import muttonImg from "../assets/mutton.png";
+import chickenImg from "../assets/chicken.png";
+import fishImg from "../assets/fish.png";
+import addonsImg from "../assets/addons.png";
+import comboImg from "../assets/combo.png";
 import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -18,6 +34,7 @@ const Catalogue = () => {
   const [loading, setLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showCustomization, setShowCustomization] = useState(false);
+  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const { addToCart, removeFromCart, getItemQuantity, getTotalItems } =
     useCart();
   const navigate = useNavigate();
@@ -71,15 +88,30 @@ const Catalogue = () => {
     {},
   );
 
+  const categoryImages = {
+  "mutton handi": muttonImg,
+  "chicken handi": chickenImg,
+  fish: fishImg,
+  "add-ons": addonsImg,
+  combo: comboImg,
+};
+
+const categories = Object.keys(groupedProducts).map((category) => ({
+  id: category.toLowerCase().replace(/\s+/g, "-"),
+  name: category,
+  image:
+    categoryImages[category.toLowerCase()] || muttonImg,
+}));
+
   const handleAddToCart = (product) => {
     // const quantity = getItemQuantity(product.id);
     const quantity = getItemQuantity(product.id, []);
     // 🟢 SIMPLE ITEM → direct add
     if (!product.hasCustomization) {
       addToCart({
-  ...product,
-  addons: [], // ⭐ MUST
-});
+        ...product,
+        addons: [], // ⭐ MUST
+      });
       return;
     }
 
@@ -91,9 +123,9 @@ const Catalogue = () => {
     // 🟢 ALREADY ADDED → direct increase
     else {
       addToCart({
-  ...product,
-  addons: [],
-});
+        ...product,
+        addons: [],
+      });
     }
   };
 
@@ -101,6 +133,19 @@ const Catalogue = () => {
     addToCart(productWithAddons);
     setShowCustomization(false);
     setSelectedProduct(null);
+  };
+
+  const scrollToCategory = (categoryId) => {
+    const section = document.getElementById(categoryId);
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+
+    setShowCategoryMenu(false);
   };
 
   if (loading) {
@@ -174,7 +219,11 @@ const Catalogue = () => {
       {/* Products by Category */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         {Object.entries(groupedProducts).map(([category, categoryProducts]) => (
-          <div key={category} className="mb-12">
+          <div
+            key={category}
+            id={category.toLowerCase().replace(/\s+/g, "-")}
+  className="mb-12 menu-section"
+          >
             <div className="flex items-center justify-between mb-6">
               <h2
                 className="text-2xl md:text-3xl font-semibold text-[#E9EDEF] font-['Outfit']"
@@ -280,6 +329,158 @@ const Catalogue = () => {
           </div>
         ))}
       </div>
+
+      {/* Floating Menu Button */}
+<div className="fixed bottom-24 right-4 z-50">
+  {/* Popup Menu */}
+  <div
+    className={`
+      absolute
+      bottom-16
+      right-0
+      w-[260px]
+      transition-all
+      duration-300
+      origin-bottom-right
+      ${
+        showCategoryMenu
+          ? "opacity-100 scale-100 translate-y-0"
+          : "opacity-0 scale-95 translate-y-2 pointer-events-none"
+      }
+    `}
+  >
+    <div
+      className="
+        rounded-3xl
+        overflow-hidden
+        border
+        border-[#5c341d]
+        bg-[#1a120d]/95
+        backdrop-blur-2xl
+        shadow-[0_10px_40px_rgba(0,0,0,0.45)]
+      "
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+        <h2 className="text-white text-xl font-bold font-['Outfit']">
+          Menu
+        </h2>
+
+        <button
+          onClick={() => setShowCategoryMenu(false)}
+          className="
+            w-8
+            h-8
+            rounded-full
+            hover:bg-white/10
+            flex
+            items-center
+            justify-center
+            transition
+          "
+        >
+          <X className="w-4 h-4 text-white" />
+        </button>
+      </div>
+
+      {/* Categories */}
+      <div className="max-h-[400px] overflow-y-auto p-3 space-y-2">
+        {categories.map((category, index) => (
+          <button
+            key={index}
+            onClick={() => scrollToCategory(category.id)}
+            className="
+              w-full
+              flex
+              items-center
+              gap-3
+              px-3
+              py-3
+              rounded-2xl
+              hover:bg-[#2d1b12]
+              transition-all
+              duration-300
+              group
+            "
+          >
+            {/* Image */}
+            <img
+              src={category.image}
+              alt={category.name}
+              className="
+                w-14
+                h-14
+                rounded-full
+                object-cover
+                border-2
+                border-[#5c341d]
+                group-hover:scale-105
+                transition-all
+                duration-300
+              "
+            />
+
+            {/* Text */}
+            <div className="flex-1 text-left">
+              <p className="text-white font-semibold text-[15px]">
+                {category.name}
+              </p>
+
+              <p className="text-[#d1a47f] text-xs">
+                {
+                  groupedProducts[category.name]?.length
+                } dishes
+              </p>
+            </div>
+
+            {/* Arrow */}
+            <div
+              className="
+                text-[#ff9d5c]
+                text-lg
+                group-hover:translate-x-1
+                transition
+              "
+            >
+              →
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  {/* Floating Button */}
+  <button
+    onClick={() => setShowCategoryMenu(!showCategoryMenu)}
+    className="
+      h-14
+      px-5
+      rounded-full
+      bg-gradient-to-r
+      from-[#2b160d]
+      to-[#4b2615]
+      text-white
+      flex
+      items-center
+      gap-2
+      border
+      border-[#6d3d22]
+      shadow-[0_8px_30px_rgba(0,0,0,0.35)]
+      backdrop-blur-xl
+      hover:scale-105
+      active:scale-95
+      transition-all
+      duration-300
+    "
+  >
+    <Menu className="w-5 h-5" />
+
+    <span className="font-semibold text-sm tracking-wide">
+      Menu
+    </span>
+  </button>
+</div>
 
       {/* Floating View Cart Button */}
       {getTotalItems() > 0 && (

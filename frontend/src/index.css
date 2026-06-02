@@ -18,6 +18,14 @@ code {
         source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.menu-section {
+  scroll-margin-top: 120px;
+}
+
 @layer base {
     :root {
         --background: 210 20% 6%;
