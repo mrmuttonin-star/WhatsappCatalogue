@@ -21,7 +21,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 origins = [
-    "https://whatsappcatalogue.mrmutton.com",
+    "https://catalogue.mrmutton.com",
     "http://localhost:3000",
 ]
 
